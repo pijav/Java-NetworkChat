@@ -171,7 +171,7 @@ public class ChatGUI extends Application {
 		});
 
 		// Set stage
-		primaryStage.setTitle("Hello from Universe");
+		primaryStage.setTitle("NetworkChat (work in progress)");
 		primaryStage.setScene(mainScene);
 		primaryStage.setOnCloseRequest(e -> {
 			e.consume();
