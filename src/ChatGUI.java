@@ -163,7 +163,7 @@ public class ChatGUI extends Application {
 			sendMessage.setDisable(true);
 			disconnect.setDisable(true);
 			connect.setDisable(false);
-			//init quit with special symbol
+			//send quit phrase with special symbol
 			setMessage(".bye");
 			engine.send();
 			
