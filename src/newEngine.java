@@ -28,8 +28,7 @@ public class newEngine {
 	      }
 	      catch(IOException ioe){  
 	    	  System.out.println("Unexpected exception: " + ioe.getMessage());
-	      }
-	      
+	      }   
 	}
 	
 	public void open() throws IOException{
