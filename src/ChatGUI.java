@@ -145,7 +145,7 @@ public class ChatGUI extends Application {
 			sendMessage.setDisable(false);
 			disconnect.setDisable(false);
 			connect.setDisable(true);
-			//send nickname with special preambula
+			//send nickname with special symbol
 			setMessage(".nickname" + getName());
 			engine.send();
 		});
@@ -163,7 +163,7 @@ public class ChatGUI extends Application {
 			sendMessage.setDisable(true);
 			disconnect.setDisable(true);
 			connect.setDisable(false);
-			//init quit with special preambula
+			//init quit with special symbol
 			setMessage(".bye");
 			engine.send();
 			
