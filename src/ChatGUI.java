@@ -67,7 +67,7 @@ public class ChatGUI extends Application {
 		HBox topBox = new HBox(15);
 		topBox.setPadding(new Insets(10, 10, 10, 10));
 		nameInput = new TextField();
-		nameInput.setPromptText("Ваш ник");
+		nameInput.setPromptText("set your nickname");
 		connect = new Button();
 		connect.setText("Connect");
 		disconnect = new Button();
@@ -120,11 +120,11 @@ public class ChatGUI extends Application {
 		HBox bottomBox = new HBox(10);
 		bottomBox.setPadding(new Insets(10, 10, 10, 10));
 		messageInput = new TextArea();
-		messageInput.setPromptText("Введите текст");
+		messageInput.setPromptText("put text here");
 		messageInput.setMinSize(580, 100);
 		messageInput.setMaxSize(580, 100);
 		sendMessage = new Button();
-		sendMessage.setText("Отправить");
+		sendMessage.setText("Send");
 		sendMessage.setDisable(true);
 		// add elements to Box
 		bottomBox.getChildren().addAll(messageInput, sendMessage);
@@ -184,7 +184,7 @@ public class ChatGUI extends Application {
 	}
 
 	private void closeProgram() {
-		boolean result = returnDataBox.display("Подтвердите выход", "Выйти из программы?");
+		boolean result = returnDataBox.display("Do you really want to quit?", "Quit?");
 		if (result) {
 
 			Platform.exit();
