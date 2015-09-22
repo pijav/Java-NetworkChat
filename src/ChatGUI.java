@@ -26,6 +26,7 @@ public class ChatGUI extends Application {
 	TextArea usersList;
 	static TextArea chatField;
 	static String userName;
+	
 
 	public static String getName() {
 		return nameInput.getText();
@@ -43,10 +44,10 @@ public class ChatGUI extends Application {
 		messageInput.setText(args);
 	}
 
-	public static void setDisplay(String args) {
-		chatField.setText(args);
+	public void addToDisplay(String args) {
+		chatField.appendText(args + "\n");
 	}
-
+	
 	Label currentUsers;
 
 	Button connect;
@@ -67,9 +68,14 @@ public class ChatGUI extends Application {
 		HBox topBox = new HBox(15);
 		topBox.setPadding(new Insets(10, 10, 10, 10));
 		nameInput = new TextField();
-		nameInput.setPromptText("set your nickname");
+		nameInput.setPromptText("set your nickname here");
 		connect = new Button();
 		connect.setText("Connect");
+		Platform.runLater(new Runnable() {
+		    public void run() {
+		        connect.requestFocus();
+		    }
+		});
 		disconnect = new Button();
 		disconnect.setText("Disconnect");
 		disconnect.setDisable(true);
@@ -123,6 +129,7 @@ public class ChatGUI extends Application {
 		messageInput.setPromptText("put text here");
 		messageInput.setMinSize(580, 100);
 		messageInput.setMaxSize(580, 100);
+		messageInput.setDisable(true);
 		sendMessage = new Button();
 		sendMessage.setText("Send");
 		sendMessage.setDisable(true);
@@ -140,14 +147,20 @@ public class ChatGUI extends Application {
 		// action logic
 		newEngine engine = new newEngine();
 		connect.setOnAction(e -> {
-			
-			engine.connect("localhost", 3000);
-			sendMessage.setDisable(false);
-			disconnect.setDisable(false);
-			connect.setDisable(true);
-			//send nickname with special symbol
-			setMessage(".nickname" + getName());
-			engine.send();
+			if (getName().equals("")){ // check if user forget to set nickname
+				alertBox.display("Set your nickname", "Please, set your nickname in special field first");
+			}
+			else{
+				engine.connect("localhost", 3000);
+				sendMessage.setDisable(false);
+				disconnect.setDisable(false);
+				messageInput.setDisable(false);
+				connect.setDisable(true);
+				nameInput.setDisable(true);
+				//send nickname with special symbol
+				setMessage(".nickname" + getName());
+				engine.send();
+			}
 		});
 
 		sendMessage.setOnAction(e -> {
@@ -162,7 +175,9 @@ public class ChatGUI extends Application {
 		disconnect.setOnAction(e -> {
 			sendMessage.setDisable(true);
 			disconnect.setDisable(true);
+			messageInput.setDisable(true);
 			connect.setDisable(false);
+			nameInput.setDisable(false);
 			//send quit phrase with special symbol
 			setMessage(".bye");
 			engine.send();
@@ -180,7 +195,6 @@ public class ChatGUI extends Application {
 
 		primaryStage.show();
 		primaryStage.setResizable(false);
-
 	}
 
 	private void closeProgram() {
@@ -190,4 +204,6 @@ public class ChatGUI extends Application {
 			Platform.exit();
 		}
 	}
+	
+	
 }

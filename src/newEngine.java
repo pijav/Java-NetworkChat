@@ -8,13 +8,7 @@ public class newEngine {
 	private DataOutputStream outbound = null;
 	private Socket clientSocket = null;
 	private ChatClientThread client    = null;
-	
-	public static void setDisplayText(){
-		ChatGUI.setDisplay(ChatGUI.getName()+ ": текста пока что не будет");	
-		System.out.println("Готово");
 		
-	}
-	
 	public void connect(String serverName, int serverPort){
 		System.out.println("Establishing connection. Please wait ...");
 	     try{
@@ -60,7 +54,7 @@ public class newEngine {
     		close(); 
     	}
         else{
-        	System.out.println(msg); 
+        	parent.addToDisplay(msg); 
         }
     }
     
@@ -79,4 +73,7 @@ public class newEngine {
     		System.out.println("Thread closed");   
     	}
     }
+	public String transferMessageToGUI(String msg){
+		return msg;
+	}
 }
